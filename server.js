@@ -14,17 +14,11 @@ const openai = new OpenAI({
   apiKey: process.env.OPEN_AI_KEY,
 });
 
-// const response = openai.responses.create({
-//   model: "gpt-4o-mini",
-//   input: "Tell me about Akwolu Innocent Chinweike (check the internet for informarions), and what i need to lelarn from him or abstain from from him",
-//   store: true,
-// });
-
-// response.then((result) => console.log(result.output_text));
-
 
 
 app.post('/completion', async(req, res) => {
+
+  const {message} = req.body;
 
   const options ={
     method: "POST",
@@ -34,7 +28,7 @@ app.post('/completion', async(req, res) => {
     },
     body: JSON.stringify({
       model: "gpt-4o-mini",
-      messages: [{role: 'user', content: 'How old are you'}],
+      messages: [{role: 'user', content: message }],
       max_tokens: 100,
       store: true
     })
@@ -50,7 +44,7 @@ app.post('/completion', async(req, res) => {
     const message = data.choices[0].message.content;
     console.log("Data", message);
 
-    res.send({data: message})
+    res.json({data: message})
 
   } catch (error) {
     console.log(error)

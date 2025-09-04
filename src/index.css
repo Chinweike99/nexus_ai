@@ -7,16 +7,16 @@ body {
     margin: 0;
     padding: 0;
 }
-.app{
+
+.app {
     display: flex;
+    height: 100vh;
 }
 
 .sideBar {
     height: 100vh;
     width: 244px;
     border-right: 2px solid gray;
-    /* padding: 10px;
-    position: fixed; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -28,6 +28,7 @@ button {
     border-radius: 5px;
     padding: 10px;
     margin: 10px;
+    cursor: pointer;
 }
 
 nav {
@@ -40,6 +41,7 @@ nav {
     padding: 10px;
     margin: 10px;
     height: 100%;
+    overflow-y: auto;
 }
 
 .history li {
@@ -48,29 +50,63 @@ nav {
     cursor: pointer;
 }
 
-
-
+/* MAIN AREA */
 .main {
-    height: 100vh;
-    width: 100%;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    margin: 10px 0;
     text-align: center;
 }
 
-.info {
-    color: rgb(139, 163, 166);
+/* Chat feed scrollable */
+.feed {
+    flex: 1; /* take remaining space */
+    overflow-y: auto; /* scroll only feed */
+    padding: 0;
+    margin: 0;
 }
 
-.input-container{
+.feed li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 0 20px;
+    margin: 20px 0;
+    max-width: 1400px;
+}
+
+.feed li .assistant {
+    text-align: left;
+    border: 2px solid gray;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+    width: fit-content;
+}
+
+/* Bottom input stays fixed */
+.bottom-section {
+    padding: 10px 20px;
+    background-color: rgb(44, 52, 53);
+    border-top: 1px solid gray;
+    position: sticky;
+    bottom: 0;
+}
+
+.input-container {
     position: relative;
     width: 100%;
     max-width: 650px;
+    margin: 0 auto;
 }
 
-input{
+input {
     width: 100%;
     height: 25px;
     border: none;
@@ -81,24 +117,23 @@ input{
                 rgba(0, 0, 0, 0.05) 0 -12px 30px,
                 rgba(0, 0, 0, 0.05) 0 4px 6px,
                 rgba(0, 0, 0, 0.05) 0 12px 3px,
-                rgba(0, 0, 0, 0.05) 0 -4px 5px
+                rgba(0, 0, 0, 0.05) 0 -4px 5px;
 }
 
-input:focus{
+input:focus {
     outline: none;
 }
 
-.bottom-section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-#submit{
+#submit {
     position: absolute;
     bottom: 12px;
-    right: 0;
+    right: 10px;
     cursor: pointer;
+}
+
+.info {
+    color: rgb(139, 163, 166);
+    font-size: 12px;
+    margin-top: 10px;
+    text-align: center;
 }
