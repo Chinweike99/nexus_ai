@@ -1,25 +1,32 @@
 * {
     background-color: rgb(44, 52, 53);
     color: #fff;
+    box-sizing: border-box;
 }
 
 body {
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
 }
 
 .app {
     display: flex;
     height: 100vh;
+    width: 100%;
+    overflow: hidden;
 }
 
+/* SIDEBAR */
 .sideBar {
     height: 100vh;
     width: 244px;
+    min-width: 200px;
     border-right: 2px solid gray;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: rgb(44, 52, 53);
 }
 
 button {
@@ -29,6 +36,11 @@ button {
     padding: 10px;
     margin: 10px;
     cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 nav {
@@ -40,14 +52,20 @@ nav {
 .history {
     padding: 10px;
     margin: 10px;
-    height: 100%;
+    flex: 1;
     overflow-y: auto;
 }
 
 .history li {
     list-style-type: none;
-    padding: 15px 0;
+    padding: 12px 5px;
     cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.history li:hover {
+    background: rgba(255, 255, 255, 0.08);
 }
 
 /* MAIN AREA */
@@ -56,6 +74,7 @@ nav {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    overflow: hidden;
 }
 
 h1 {
@@ -65,8 +84,8 @@ h1 {
 
 /* Chat feed scrollable */
 .feed {
-    flex: 1; /* take remaining space */
-    overflow-y: auto; /* scroll only feed */
+    flex: 1;
+    overflow-y: auto;
     padding: 0;
     margin: 0;
 }
@@ -76,9 +95,9 @@ h1 {
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-    padding: 0 20px;
-    margin: 20px 0;
-    max-width: 1400px;
+    padding: 0 15px;
+    margin: 15px 0;
+    max-width: 900px;
 }
 
 .feed li .assistant {
@@ -88,15 +107,18 @@ h1 {
     border-radius: 5px;
     margin-top: 5px;
     width: fit-content;
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
-/* Bottom input stays fixed */
+/* Bottom input */
 .bottom-section {
     padding: 10px 20px;
     background-color: rgb(44, 52, 53);
     border-top: 1px solid gray;
     position: sticky;
     bottom: 0;
+    z-index: 10;
 }
 
 .input-container {
@@ -108,16 +130,13 @@ h1 {
 
 input {
     width: 100%;
-    height: 25px;
+    min-height: 40px;
     border: none;
     background-color: rgba(255, 255, 255, 0.05);
-    padding: 12px 15px;
+    padding: 12px 45px 12px 15px;
     border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.05) 0 54px 55px,
-                rgba(0, 0, 0, 0.05) 0 -12px 30px,
-                rgba(0, 0, 0, 0.05) 0 4px 6px,
-                rgba(0, 0, 0, 0.05) 0 12px 3px,
-                rgba(0, 0, 0, 0.05) 0 -4px 5px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0 4px 6px;
+    font-size: 14px;
 }
 
 input:focus {
@@ -126,9 +145,11 @@ input:focus {
 
 #submit {
     position: absolute;
-    bottom: 12px;
+    top: 50%;
     right: 10px;
+    transform: translateY(-50%);
     cursor: pointer;
+    font-size: 18px;
 }
 
 .info {
@@ -136,4 +157,71 @@ input:focus {
     font-size: 12px;
     margin-top: 10px;
     text-align: center;
+}
+
+/* ===================
+   RESPONSIVE BREAKPOINTS
+   =================== */
+@media (max-width: 1024px) {
+    .sideBar {
+        width: 200px;
+    }
+
+    .feed li {
+        max-width: 700px;
+    }
+}
+
+@media (max-width: 768px) {
+    .app {
+        flex-direction: column;
+    }
+
+    .sideBar {
+        flex-direction: row;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 2px solid gray;
+        overflow-x: auto;
+    }
+
+    .history {
+        display: flex;
+        flex-direction: row;
+        margin: 0;
+        padding: 10px;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .history li {
+        padding: 8px 15px;
+        margin-right: 10px;
+    }
+
+    .main {
+        flex: 1;
+        height: calc(100vh - 80px); /* adjust for sidebar height */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 18px;
+    }
+
+    input {
+        font-size: 12px;
+        min-height: 35px;
+    }
+
+    #submit {
+        font-size: 16px;
+    }
+
+    .feed li {
+        padding: 0 10px;
+        margin: 10px 0;
+    }
 }

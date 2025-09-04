@@ -21,3 +21,22 @@ Users can send prompts, view AI responses, and maintain multiple chat sessions w
 - **Styling:** CSS (custom styles)  
 - **Backend:** Node.js / Express (example API)  
 - **Language:** JavaScript (ES6+)  
+
+
+
+## Getting Started
+### Clone the repo
+```bash
+git clone https://github.com/Chinweike99/nexus_ai.git
+cd nexus_ai
+```
+### Install dependencies
+```bash
+npm install
+```
+
+### Start Server
+```bash
+npm run dev
+```
+
